@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the farm_ledger module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function farm_ledger_install() {
+
+  // Set the default quantity type for transaction logs to price.
+  \Drupal::configFactory()->getEditable('log.type.transaction')->set('third_party_settings.farm_log_quantity.default_quantity_type', 'price')->save();
+}
