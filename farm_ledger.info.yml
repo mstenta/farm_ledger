@@ -7,3 +7,4 @@ dependencies:
   - farm_entity
   - fraction
   - quantity
+  - ledger:ledger

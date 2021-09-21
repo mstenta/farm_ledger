@@ -16,6 +16,7 @@
       }
   ],
   "require": {
-    "drupal/fraction": "2.x-dev"
+    "drupal/fraction": "2.x-dev",
+    "drupal/ledger": "3.x-dev"
   }
 }
