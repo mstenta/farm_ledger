@@ -5,6 +5,8 @@
  * Post update hooks for the farm_ledger module.
  */
 
+use Drupal\log\Entity\LogType;
+
 /**
  * Update price quantity data structure and migrate data.
  */
@@ -89,5 +91,23 @@ function farm_ledger_post_update_uninstall_v1_migrations(&$sandbox) {
   $config = \Drupal::configFactory()->getEditable('migrate_plus.migration.farm_migrate_log_purchase');
   if (!empty($config)) {
     $config->delete();
+  }
+}
+
+/**
+ * Make "done" the default status for purchase and sale logs.
+ */
+function farm_ledger_post_update_farm_log_workflow(&$sandbox) {
+  /** @var \Drupal\log\Entity\LogType[] $log_types */
+  $ledger_log_types = [
+    'purchase',
+    'sale',
+  ];
+  $log_types = LogType::loadMultiple();
+  foreach ($log_types as $log_type) {
+    if (in_array($log_type->id(), $ledger_log_types) && $log_type->getWorkflowId() == 'log_default') {
+      $log_type->setWorkflowId('farm_log_workflow');
+      $log_type->save();
+    }
   }
 }
