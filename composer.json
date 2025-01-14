@@ -16,7 +16,7 @@
       }
   ],
   "require": {
-      "drupal/fraction": "^2.3",
+      "drupal/fraction": "^2.3 || ^3.0",
       "farmos/farmos": "^3.2"
   }
 }
